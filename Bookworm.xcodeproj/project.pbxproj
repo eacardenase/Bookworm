@@ -6,8 +6,13 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		20438D502FA40B7C002C887A /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 20438D4F2FA40B7C002C887A /* README.md */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		20438D412FA40B6B002C887A /* Bookworm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bookworm.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		20438D4F2FA40B7C002C887A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -32,6 +37,7 @@
 		20438D382FA40B6B002C887A = {
 			isa = PBXGroup;
 			children = (
+				20438D4F2FA40B7C002C887A /* README.md */,
 				20438D432FA40B6B002C887A /* Bookworm */,
 				20438D422FA40B6B002C887A /* Products */,
 			);
@@ -109,6 +115,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20438D502FA40B7C002C887A /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
