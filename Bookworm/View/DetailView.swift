@@ -11,6 +11,10 @@ import SwiftUI
 struct DetailView: View {
     let book: Book
 
+    @Environment(\.dismiss) var dismiss
+    @Environment(\.modelContext) var modelContext
+    @State private var showingDeleteAlert = false
+
     var body: some View {
         ScrollView {
             ZStack(alignment: .bottomTrailing) {
@@ -42,6 +46,26 @@ struct DetailView: View {
         .navigationTitle(book.title)
         .navigationBarTitleDisplayMode(.inline)
         .scrollBounceBehavior(.basedOnSize)
+        .toolbar {
+            ToolbarItem(placement: .destructiveAction) {
+                Button("Remove", systemImage: "trash") {
+                    showingDeleteAlert = true
+                }
+            }
+        }
+        .alert("Delete book", isPresented: $showingDeleteAlert) {
+            Button(role: .cancel) {}
+
+            Button(role: .destructive, action: deleteBook)
+        } message: {
+            Text("Are you sure?")
+        }
+    }
+
+    func deleteBook() {
+        modelContext.delete(book)
+
+        dismiss()
     }
 }
 
