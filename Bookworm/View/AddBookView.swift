@@ -22,6 +22,12 @@ struct AddBookView: View {
         "Fantasy", "Horror", "Kids", "Mistery", "Poetry", "Romance", "Thriller",
     ]
 
+    var isFormValid: Bool {
+        return !title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+            && !author.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+            && !genre.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
+
     var body: some View {
         NavigationStack {
             Form {
@@ -43,9 +49,18 @@ struct AddBookView: View {
 
                     StarRatingView(rating: $rating)
                 }
+            }
+            .navigationTitle("Add Book")
+            .interactiveDismissDisabled()
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button(role: .cancel) {
+                        dismiss()
+                    }
+                }
 
-                Section {
-                    Button("Save") {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button(role: .confirm) {
                         let newBook = Book(
                             title: title,
                             author: author,
@@ -57,10 +72,12 @@ struct AddBookView: View {
                         modelContext.insert(newBook)
 
                         dismiss()
+                    } label: {
+                        Text("Save")
                     }
+                    .disabled(!isFormValid)
                 }
             }
-            .navigationTitle("Add Book")
         }
     }
 }
