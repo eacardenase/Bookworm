@@ -27,7 +27,9 @@ struct AddBookView: View {
             Form {
                 Section {
                     TextField("Name of book", text: $title)
+
                     TextField("Author's name", text: $author)
+                        .textInputAutocapitalization(.words)
 
                     Picker("Genre", selection: $genre) {
                         ForEach(genres, id: \.self) {
