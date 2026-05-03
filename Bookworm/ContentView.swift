@@ -9,36 +9,25 @@ import SwiftData
 import SwiftUI
 
 struct ContentView: View {
-    @Query var students: [Student]
     @Environment(\.modelContext) var modelContext
+    @Query var books: [Book]
 
-    let firstNames = ["Ginny", "Harry", "Hermione", "Luna", "Ron"]
-    let lastNames = ["Granger", "Potter", "Lovegood", "Weasley"]
+    @State private var showingAddScreen = false
 
     var body: some View {
         NavigationStack {
-            List(students) { student in
-                Text(student.name)
-            }
-            .navigationTitle("Classroom")
-            .toolbar {
-                ToolbarItem(placement: .bottomBar) {
-                    Button("Add", systemImage: "plus", role: .confirm) {
-                        let chosenFirstName = firstNames.randomElement()!
-                        let chosenLastName = lastNames.randomElement()!
-
-                        let student = Student(
-                            id: UUID(),
-                            name: "\(chosenFirstName) \(chosenLastName)"
-                        )
-
-                        withAnimation {
-                            modelContext.insert(student)
+            Text("Count: \(books.count)")
+                .navigationTitle("Books")
+                .toolbar {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button("Add", systemImage: "plus") {
+                            showingAddScreen.toggle()
                         }
                     }
-                    .tint(.pink)
                 }
-            }
+                .sheet(isPresented: $showingAddScreen) {
+                    AddBookView()
+                }
         }
     }
 }
