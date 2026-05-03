@@ -5,16 +5,18 @@
 //  Created by Edwin Cardenas on 4/30/26.
 //
 
+import SwiftData
 import SwiftUI
 
 struct ContentView: View {
-    @AppStorage("notes") private var notes = ""
+    @Query var students: [Student]
 
     var body: some View {
         NavigationStack {
-            TextEditor(text: $notes)
-                .navigationTitle("Notes")
-                .padding()
+            List(students) { student in
+                Text(student.name)
+            }
+            .navigationTitle("Classroom")
         }
     }
 }
