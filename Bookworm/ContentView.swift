@@ -34,17 +34,20 @@ struct ContentView: View {
                         }
                     }
                 }
-                .navigationTitle("Books")
-                .toolbar {
-                    ToolbarItem(placement: .topBarTrailing) {
-                        Button("Add", systemImage: "plus") {
-                            showingAddScreen.toggle()
-                        }
+            }
+            .navigationTitle("Books")
+            .navigationDestination(for: Book.self) {
+                DetailView(book: $0)
+            }
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Add", systemImage: "plus") {
+                        showingAddScreen.toggle()
                     }
                 }
-                .sheet(isPresented: $showingAddScreen) {
-                    AddBookView()
-                }
+            }
+            .sheet(isPresented: $showingAddScreen) {
+                AddBookView()
             }
         }
     }
